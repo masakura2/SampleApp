@@ -23,9 +23,6 @@ jobs:
   ipa:
     needs: export
     runs-on: macos-12
-    defaults:
-      run:
-        working-directory: build
     steps:
       - uses: actions/download-artifact@v3
         with:
