@@ -5,6 +5,7 @@ on:
 
 jobs:
   export:
+    if: false
     runs-on: ubuntu-latest
     container: unityci/editor:ubuntu-2021.3.16f1-ios-1
     steps:
@@ -14,3 +15,8 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
       - run: unity-editor -buildTarget iOS -batchmode -quit -projectPath . -logFile - -executeMethod Export.IOS
       - run: ls -la build
+  
+  ipa:
+    runs-on: macos-12
+    steps:
+      - run: ls -ld /Applications/Xcode*
