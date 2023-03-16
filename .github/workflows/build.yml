@@ -1,0 +1,16 @@
+name: ios
+
+on:
+  push:
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    container: unityci/editor:ubuntu-2021.3.16f1-ios-1
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo "$UNITY_LICENSE" > UnityLicenseFile.ulf && unity-editor -logFile - -quit -manualLicenseFile UnityLicenseFile.ulf || true
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+      - run: unity-editor -buildTarget iOS -batchmode -quit -projectPath . -logFile - -executeMethod Export.IOS
+      - run: ls -la build
