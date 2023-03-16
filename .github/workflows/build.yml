@@ -27,6 +27,7 @@ jobs:
       run:
         working-directory: build
     steps:
+      - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
         with:
           name: build
