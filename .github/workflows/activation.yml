@@ -27,7 +27,7 @@ jobs:
       - uses: xrtk/unity-setup@v7
         with:
           build-targets: iOS
-      - run: ${{ env.UNITY_EDITOR_PATH }} -batchmode -createManualActivationFile -logfile
+      - run: ${{ env.UNITY_EDITOR_PATH }} -batchmode -createManualActivationFile -logfile - || true
       - uses: actions/upload-artifact@v3
         with:
           name: unity-manual-activation-file-macos
