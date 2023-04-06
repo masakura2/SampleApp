@@ -12,6 +12,9 @@ jobs:
         with:
           build-targets: iOS
       - run: echo "${{ env.UNITY_EDITOR_PATH }}"
+      - run: echo "$UNITY_LICENSE" > UnityLicenseFile.ulf && ${{ env.UNITY_EDITOR_PATH }} -logFile - -quit -manualLicenseFile UnityLicenseFile.ulf || true
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
       - run: ${{ env.UNITY_EDITOR_PATH }} -buildTarget iOS -batchmode -quit -projectPath . -logFile - -executeMethod Export.IOS
       - run: sudo xcode-select -s '/Applications/Xcode_13.4.1.app/Contents/Developer'
       - run: xcodebuild -version
