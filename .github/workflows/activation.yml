@@ -4,7 +4,12 @@ on:
 jobs:
   activation:
     name: Request manual activation file 🔑
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+          - os: macos-12
     steps:
       # Request manual activation file
       - name: Request manual activation file
