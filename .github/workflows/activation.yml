@@ -4,12 +4,7 @@ on:
 jobs:
   activation:
     name: Request manual activation file 🔑
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        include:
-          - os: ubuntu-latest
-          - os: macos-12
+    runs-on: ubuntu-latest
     steps:
       # Request manual activation file
       - name: Request manual activation file
@@ -23,3 +18,17 @@ jobs:
         with:
           name: ${{ steps.getManualLicenseFile.outputs.filePath }}
           path: ${{ steps.getManualLicenseFile.outputs.filePath }}
+
+  macos:
+    name: macos
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v3
+      - uses: xrtk/unity-setup@v7
+        with:
+          build-targets: iOS
+      - run: ${{ env.UNITY_EDITOR_PATH }} -batchmode -createManualActivationFile -logfile
+      - uses: actions/upload-artifact@v3
+        with:
+          name: unity-manual-activation-file-macos
+          path: '*.alf'
