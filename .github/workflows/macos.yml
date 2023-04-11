@@ -13,8 +13,6 @@ jobs:
         with:
           build-targets: iOS
       - run: echo "${{ env.UNITY_EDITOR_PATH }}"
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
       - run: echo "$UNITY_LICENSE" > UnityLicenseFile.ulf && ${{ env.UNITY_EDITOR_PATH }} -logFile - -quit -manualLicenseFile UnityLicenseFile.ulf || true
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE_MACOS }}
