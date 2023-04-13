@@ -13,7 +13,7 @@ jobs:
         with:
           build-targets: iOS
       - run: echo "${{ env.UNITY_EDITOR_PATH }}"
-      - run: echo "$UNITY_LICENSE" > UnityLicenseFile.ulf && ${{ env.UNITY_EDITOR_PATH }} -logFile - -quit -manualLicenseFile UnityLicenseFile.ulf || true
+      - run: echo "$UNITY_LICENSE" > UnityLicenseFile.ulf && ${{ env.UNITY_EDITOR_PATH }} -batchmode -logFile - -quit -manualLicenseFile UnityLicenseFile.ulf || true
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE_MACOS }}
       - run: sha256sum UnityLicenseFile.ulf
